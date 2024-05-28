@@ -1,14 +1,11 @@
 <template>
   <div class="container mt-3">
     <div class="jumbotron">
-      <h1>Bienvenidos a Vue CLI</h1>
-      <h2>Componente Principal (App)</h2>
+      <h1>Bienvenidos al TP3</h1>
       <br>
-
       <Navbar />
       <RouterView />
-
-
+      
     </div>
   </div>
 </template>
@@ -26,7 +23,7 @@ export default {
 
 <style>
   h1 {
-    color: crimson;
+    color: rgb(0, 0, 0);
   }
   h2 {
     color: blue;

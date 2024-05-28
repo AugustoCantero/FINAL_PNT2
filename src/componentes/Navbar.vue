@@ -1,7 +1,6 @@
 <template>
 
   <section class="src-componentes-navbar">
-    <button class="btn btn-info my-3" @click="goToContadores">Ir a Contadores</button>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <RouterLink class="navbar-brand" to="/">Inicio</RouterLink>
