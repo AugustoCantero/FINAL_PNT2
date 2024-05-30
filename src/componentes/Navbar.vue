@@ -12,8 +12,24 @@
           <li class="nav-item">
             <RouterLink class="nav-link" to="/formulario">Formulario</RouterLink>
           </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+          Materias
+        </a>
+        <div class="dropdown-menu">
+          <li class="dropdown-item">
+            <RouterLink class="nav-link" to="/matematica" style="color: black;">Matematica</RouterLink>
+          </li>
+          <li class="dropdown-item">
+            <RouterLink class="nav-link" to="/lengua" style="color: black;">Lengua</RouterLink>
+          </li>
+          <li class="dropdown-item">
+            <RouterLink class="nav-link" to="/historia" style="color: black;">Historia</RouterLink>
+          </li>
+        </div>
+      </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/api">Api</RouterLink>
+            <RouterLink class="nav-link" to="/api">Notas</RouterLink>
           </li>
         </ul>
       </div>

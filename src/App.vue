@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-3">
     <div class="jumbotron">
-      <h1>Bienvenidos al TP3</h1>
+      <h1>Plataforma de notas del alumnado</h1>
       <br>
       <Navbar />
       <RouterView />
