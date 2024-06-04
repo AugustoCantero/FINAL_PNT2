@@ -2,7 +2,7 @@
 
     <section class="src-componentes-historia">
   
-      <button class="btn btn-info my-3 mr-2" @click="getUsuarios">GET</button>
+      <br>
   
       <div v-if="usuarios.length" class="table-responsive">
         <table class="table table-info">
@@ -37,6 +37,7 @@
       name: 'src-componentes-lengua',
       props: [],
       mounted () {
+        this.getUsuarios()
       },
       data () {
         return {  

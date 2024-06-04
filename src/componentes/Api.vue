@@ -2,7 +2,7 @@
 
   <section class="src-componentes-api">
 
-    <button class="btn btn-info my-3 mr-2" @click="getUsuarios">GET</button>
+    <br>
 
     <div v-if="usuarios.length" class="table-responsive">
       <table class="table table-info">
@@ -41,7 +41,8 @@
     name: 'src-componentes-api',
     props: [],
     mounted () {
-    },
+      this.getUsuarios()
+      },
     data () {
       return {  
         usuarios: [],
