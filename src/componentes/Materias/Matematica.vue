@@ -16,9 +16,11 @@
             <td>{{usuario.id}}</td>
             <td>{{usuario.nombre}}</td>
             <td>{{usuario.email}}</td>
-            <td>{{usuario.notaMatematica}}</td>
+            
             <td>
-              <button class="btn btn-primary my-1 mr-2" @click="ediarNota(usuario.id)">
+              {{usuario.notaMatematica}}</td>
+            <td>
+              <button class="btn btn-primary my-1 mr-2" @click="editarNota(usuario.id)">
                 Editar Nota
               </button>
             </td>

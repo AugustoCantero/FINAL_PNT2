@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = 'https://66562f2f9f970b3b36c490cd.mockapi.io/api/usuarios'
+const url = 'https://66562f2f9f970b3b36c490cd.mockapi.io/api/usuarios/'
 
 
 

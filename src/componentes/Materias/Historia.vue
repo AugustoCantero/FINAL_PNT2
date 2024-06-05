@@ -18,7 +18,7 @@
             <td>{{usuario.email}}</td>
             <td>{{usuario.notaHistoria}}</td>
             <td>
-              <button class="btn btn-primary my-1 mr-2" @click="ediarNota(usuario.id)">
+              <button class="btn btn-primary my-1 mr-2" @click="editarNota(usuario.id)">
                 Editar Nota
               </button>
             </td>
