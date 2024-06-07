@@ -79,11 +79,17 @@
       <th>Nombre</th>
       <th>Edad</th>
       <th>Email</th>
+      <th>Nota Matemática</th>
+      <th>Nota Lengua</th>
+      <th>Nota Historia</th>
     </tr>
     <tr v-for="(inscripto, index) in inscriptos" :key="index">
       <td>{{ inscripto.nombre }}</td>
       <td>{{ inscripto.edad }}</td>
       <td>{{ inscripto.email }}</td>
+      <td>{{ inscripto.notas.notaMatematica }}</td>
+      <td>{{ inscripto.notas.notaLengua }}</td>
+      <td>{{ inscripto.notas.notaHistoria }}</td>
     </tr>
     </table>
   </div>
