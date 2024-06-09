@@ -1,0 +1,95 @@
+<section class="src-componentes-formulario2">
+  <div class="jumbotron">
+    <h2>Formulario de inscripción2</h2>
+    <hr>
+
+    <form novalidate @submit.prevent="agregarUsuario()">
+      <!-- Campo nombre -->
+      <div class="form-group">
+        <label for="nombre">nombre</label>
+        <input 
+          id="nombre" 
+          type="text" 
+          class="form-control" 
+          v-model.trim="formData.nombre"
+          @input="formDirty.nombre=true"
+        >
+        <!-- validación nombre-->
+        <div v-if="
+            (!formData.nombre || 
+            formData.nombre.length < 5 || 
+            formData.nombre.length > 15) && formDirty.nombre"
+            class="alert alert-danger mt-1"
+        >
+          <span v-if="!formData.nombre">Campo requerido</span> 
+          <span v-else-if="formData.nombre.length < 5">Este campo debe poseer al menos 5 caracteres</span> 
+          <span v-else="formData.nombre.length > 15">Este campo no debe poseer más de 15 caracteres</span> 
+        </div>
+      </div>
+
+      <!-- Campo edad -->
+      <div class="form-group">
+        <label for="edad">edad</label>
+        <input id="edad" type="number" class="form-control" v-model.number="formData.edad" @input="formDirty.edad=true">
+        
+        <!-- validación edad-->
+        <div v-if="(!formData.edad || formData.edad < 18 || formData.edad > 120) && formDirty.edad" class="alert alert-danger mt-1">
+          
+
+          <span v-if="!formData.edad">Campo requerido</span> 
+          <span v-else-if="formData.edad < 18">Edad minima 18 años</span> 
+          <span v-else="formData.edad > 120">Edad maxima 120 años</span> 
+        </div>
+      </div>
+
+      <!-- Campo email -->
+      <div class="form-group">
+        <label for="email">email</label>
+        <input id="email" type="email" class="form-control" v-model="formData.email" @input="formDirty.email=true">
+        
+        <!-- validación email-->
+        <div v-if="!formData.email && formDirty.email" class="alert alert-danger mt-1">
+          Campo requerido
+        </div>
+      </div>
+
+      <!-- Campo password -->
+      <div class="form-group">
+        <label for="password">password</label>
+        <input id="password" type="password" class="form-control" v-model="formData.password" @input="formDirty.password=true">
+
+        <!-- validación password-->
+        <div v-if="!formData.password && formDirty.password" class="alert alert-danger mt-1">
+          Campo requerido
+        </div>
+      </div>
+
+      <button 
+        class="btn btn-success my-3" 
+        :disabled="validarBotonEnvio()"
+      >Agregar Usuario</button>
+
+    </form>
+
+  </div>
+
+  <div v-if="inscriptos.length">
+    <table class="table table-dark">
+    <tr>
+      <th>Nombre</th>
+      <th>Edad</th>
+      <th>Email</th>
+    </tr>
+    <tr v-for="(inscripto, index) in inscriptos" :key="index">
+      <td>{{ inscripto.nombre }}</td>
+      <td>{{ inscripto.edad }}</td>
+      <td>{{ inscripto.email }}</td>
+    </tr>
+    </table>
+  </div>
+  <h1 v-else class="alert alert-danger">
+    No hay inscriptos
+  </h1>
+
+</section>
+
