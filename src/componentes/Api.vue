@@ -46,7 +46,7 @@
             <td v-if="filtroNota === 'todas' || filtroNota === 'historia'">{{ usuario.notaHistoria }}</td>
             <td>
               <button class="btn btn-primary my-1 mr-2" @click="editarNota(usuario.id)">
-                Editar Notas
+              {{ filtroNota === 'todas' ? 'Editar Notas' : 'Editar Nota' }}
               </button>
             </td>
           </tr>
