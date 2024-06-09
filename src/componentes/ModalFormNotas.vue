@@ -13,28 +13,33 @@
             <form class="m-3" @submit.prevent="submit">
   
 
-              <div class="form-group">
-                  <label htmlFor="notaMatematica">notaMatematica</label>
-                  <input class="form-control" id="notaMatematica" type="number" step="1" min="0" max="10" v-model="usuario.notaMatematica" @input="usuarioDirty.notaMatematica=true" />
-                  <div v-if="!usuario.notaMatematica && usuarioDirty.notaMatematica" class="alert alert-danger mt-1">
-                    Campo requerido
-                  </div>
+              <div v-if="filtroNota === 'todas' || filtroNota === 'matematica'" class="form-group">
+                <label for="notaMatematica">Nota Matemática</label>
+                <input class="form-control" id="notaMatematica" type="number" step="1" min="0" max="10" 
+                       v-model="usuario.notaMatematica" @input="usuarioDirty.notaMatematica=true" />
+                <div v-if="!usuario.notaMatematica && usuarioDirty.notaMatematica" class="alert alert-danger mt-1">
+                  Campo requerido
+                </div>
               </div>
 
-              <div class="form-group">
-                  <label htmlFor="notaLengua">notaLengua</label>
-                  <input class="form-control" id="notaLengua" type="number" step="1" min="0" max="10" v-model="usuario.notaLengua" @input="usuarioDirty.notaLengua=true" />
-                  <div v-if="!usuario.notaLengua && usuarioDirty.notaLengua" class="alert alert-danger mt-1">
-                    Campo requerido
-                  </div>
+              <!-- Campo de notaLengua -->
+              <div v-if="filtroNota === 'todas' || filtroNota === 'lengua'" class="form-group">
+                <label for="notaLengua">Nota Lengua</label>
+                <input class="form-control" id="notaLengua" type="number" step="1" min="0" max="10" 
+                       v-model="usuario.notaLengua" @input="usuarioDirty.notaLengua=true" />
+                <div v-if="!usuario.notaLengua && usuarioDirty.notaLengua" class="alert alert-danger mt-1">
+                  Campo requerido
+                </div>
               </div>
 
-              <div class="form-group">
-                  <label htmlFor="notaHistoria">notaHistoria</label>
-                  <input class="form-control" id="notaHistoria" type="number" step="1" min="0" max="10" v-model="usuario.notaHistoria" @input="usuarioDirty.notaHistoria=true" />
-                  <div v-if="!usuario.notaHistoria && usuarioDirty.notaHistoria" class="alert alert-danger mt-1">
-                    Campo requerido
-                  </div>
+              <!-- Campo de notaHistoria -->
+              <div v-if="filtroNota === 'todas' || filtroNota === 'historia'" class="form-group">
+                <label for="notaHistoria">Nota Historia</label>
+                <input class="form-control" id="notaHistoria" type="number" step="1" min="0" max="10" 
+                       v-model="usuario.notaHistoria" @input="usuarioDirty.notaHistoria=true" />
+                <div v-if="!usuario.notaHistoria && usuarioDirty.notaHistoria" class="alert alert-danger mt-1">
+                  Campo requerido
+                </div>
               </div>
    
               <button :disabled="!usuarioValido" :class="['btn', { 'btn-warning': editarID, 'btn-success': !editarID }, 'mt-5 mb-3', 'float-right']">
@@ -58,7 +63,7 @@
   import { Modal } from "bootstrap";
   export default {
     name: "src-componentes-form-usuario",
-    props: ["mostrar","editarID","usuarioID"],
+    props: ["mostrar","editarID","usuarioID", "filtroNota"],
     mounted() {
       this.modal = new Modal(document.getElementById("exampleModal"), { 
         keyboard: false,
@@ -87,19 +92,26 @@
       },
     },
     computed: {
-        usuarioValido() {
-            return ( 
-                    this.usuario.nombre &&
-                    this.usuario.email &&
-                    (this.usuario.notaMatematica ||
-                    this.usuario.notaLengua ||
-                    this.usuario.notaHistoria)
-            )
-        }, 
-
-        usuario() {
-            return this.usuarioID
+      usuarioValido() {
+        // Validación basada en el filtro actual
+        if (this.filtroNota === 'todas') {
+          return this.usuario.notaMatematica || this.usuario.notaLengua || this.usuario.notaHistoria;
         }
+        if (this.filtroNota === 'matematica') {
+          return this.usuario.notaMatematica;
+        }
+        if (this.filtroNota === 'lengua') {
+          return this.usuario.notaLengua;
+        }
+        if (this.filtroNota === 'historia') {
+          return this.usuario.notaHistoria;
+        }
+        return false;
+      }, 
+
+      usuario() {
+        return this.usuarioID
+      }
 
     },
     watch: {
