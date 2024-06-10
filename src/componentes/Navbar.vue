@@ -10,7 +10,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/formulario">Formulario</RouterLink>
+            <RouterLink class="nav-link" to="/misNotas">Mis Notas</RouterLink>
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/formulario2">Formulario2</RouterLink>

@@ -20,21 +20,12 @@ export default {
   methods: {
     getInicialData() {
       return {
-        nombre: null,
-        edad: null,
         email: null,
         password: null
       }
     },
     validarBotonEnvio() {
-      return (
-        !this.formData.nombre || 
-        this.formData.nombre.length < 5 || 
-        this.formData.nombre.length > 15 
-      ) ||  
-      (!this.formData.edad || this.formData.edad < 18 || this.formData.edad > 120) || 
-      !this.formData.email || 
-      !this.formData.password
+      return (!this.formData.email || !this.formData.password)
     },
     async enviar() {
       const datos = {...this.formData}
@@ -52,6 +43,7 @@ export default {
       
     },
     listarInscripto(datos){
+      this.inscriptos = []
       this.inscriptos.push(datos)
     },
     async getUsuarioNotas(email) {

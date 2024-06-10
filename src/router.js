@@ -14,7 +14,7 @@ const routes = [
 
     { path: '/', redirect: '/inicio' },
 
-    { path: '/formulario', component: Formulario },
+    { path: '/misNotas', component: Formulario },
     { path: '/formulario2', component: Formulario2 },
     { path: '/notas', component: Api },
     { path: '/inicio', component: Inicio },
