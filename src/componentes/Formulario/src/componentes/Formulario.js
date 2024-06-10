@@ -31,14 +31,14 @@ export default {
       const datos = {...this.formData}
       console.log(datos)
 
-      const usuarioNotas = await this.getUsuarioNotas(datos.email)
+      const usuarioNotas = await this.getUsuarioNotas(datos.email, datos.password)
       if (usuarioNotas !== null) {
         datos.notas = usuarioNotas || {notaMatematica: 'sin nota', notaLengua: 'sin nota', notaHistoria: 'sin nota'}
         this.listarInscripto(datos)
         this.formData = this.getInicialData()
         this.formDirty = this.getInicialData()
       } else {
-        alert('Usuario no encontrado, email incorrecto')
+        alert('Usuario no encontrado, email o contraseña incorrectos')
       }
       
     },
@@ -46,10 +46,10 @@ export default {
       this.inscriptos = []
       this.inscriptos.push(datos)
     },
-    async getUsuarioNotas(email) {
+    async getUsuarioNotas(email, password) {
       try {
         const response = await axios.get(`https://66562f2f9f970b3b36c490cd.mockapi.io/api/usuarios?email=${email}`)
-        const usuario = response.data[0]
+        const usuario = response.data.find(user => user.email === email && user.password === password)
         return usuario ? {
           notaMatematica: usuario.notaMatematica || 'sin nota',
           notaLengua: usuario.notaLengua || 'sin nota',
