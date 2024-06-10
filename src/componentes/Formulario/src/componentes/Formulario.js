@@ -8,7 +8,8 @@ export default {
     return {
       formData: this.getInicialData(),
       formDirty: this.getInicialData(),
-      inscriptos:[]
+      inscriptos:[],
+      nombreUsuario: null
     }
   },
   computed: {
@@ -34,6 +35,7 @@ export default {
       const usuarioNotas = await this.getUsuarioNotas(datos.email, datos.password)
       if (usuarioNotas !== null) {
         datos.notas = usuarioNotas || {notaMatematica: 'sin nota', notaLengua: 'sin nota', notaHistoria: 'sin nota'}
+        this.nombreUsuario = usuarioNotas.nombre
         this.listarInscripto(datos)
         this.formData = this.getInicialData()
         this.formDirty = this.getInicialData()
@@ -51,6 +53,7 @@ export default {
         const response = await axios.get(`https://66562f2f9f970b3b36c490cd.mockapi.io/api/usuarios?email=${email}`)
         const usuario = response.data.find(user => user.email === email && user.password === password)
         return usuario ? {
+          nombre: usuario.nombre,
           notaMatematica: usuario.notaMatematica || 'sin nota',
           notaLengua: usuario.notaLengua || 'sin nota',
           notaHistoria: usuario.notaHistoria || 'sin nota'
