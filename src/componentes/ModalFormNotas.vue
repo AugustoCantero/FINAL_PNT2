@@ -17,8 +17,10 @@
                 <label for="notaMatematica">Nota Matemática</label>
                 <input class="form-control" id="notaMatematica" type="number" step="1" min="0" max="10" 
                        v-model="usuario.notaMatematica" @input="usuarioDirty.notaMatematica=true" />
-                <div v-if="!usuario.notaMatematica && usuarioDirty.notaMatematica" class="alert alert-danger mt-1">
-                  Campo requerido
+                <div v-if="(!usuario.notaMatematica || usuario.notaMatematica < 0 || usuario.notaMatematica > 10) && usuarioDirty.notaMatematica" class="alert alert-danger mt-1">
+                  <span v-if="!usuario.notaMatematica">Campo requerido</span> 
+                  <span v-else-if="usuario.notaMatematica < 0">Nota minima 0</span> 
+                  <span v-else-if="usuario.notaMatematica > 10">Nota maxima 10</span> 
                 </div>
               </div>
 
@@ -27,8 +29,10 @@
                 <label for="notaLengua">Nota Lengua</label>
                 <input class="form-control" id="notaLengua" type="number" step="1" min="0" max="10" 
                        v-model="usuario.notaLengua" @input="usuarioDirty.notaLengua=true" />
-                <div v-if="!usuario.notaLengua && usuarioDirty.notaLengua" class="alert alert-danger mt-1">
-                  Campo requerido
+                <div v-if="(!usuario.notaLengua || usuario.notaLengua < 0 || usuario.notaLengua > 10) && usuarioDirty.notaLengua" class="alert alert-danger mt-1">
+                  <span v-if="!usuario.notaLengua">Campo requerido</span> 
+                  <span v-else-if="usuario.notaLengua < 0">Nota minima 0</span> 
+                  <span v-else-if="usuario.notaLengua > 10">Nota maxima 10</span> 
                 </div>
               </div>
 
@@ -37,8 +41,10 @@
                 <label for="notaHistoria">Nota Historia</label>
                 <input class="form-control" id="notaHistoria" type="number" step="1" min="0" max="10" 
                        v-model="usuario.notaHistoria" @input="usuarioDirty.notaHistoria=true" />
-                <div v-if="!usuario.notaHistoria && usuarioDirty.notaHistoria" class="alert alert-danger mt-1">
-                  Campo requerido
+                <div v-if="(!usuario.notaHistoria || usuario.notaHistoria < 0 || usuario.notaHistoria > 10) && usuarioDirty.notaHistoria" class="alert alert-danger mt-1">
+                  <span v-if="!usuario.notaHistoria">Campo requerido</span> 
+                  <span v-else-if="usuario.notaHistoria < 0">Nota minima 0</span> 
+                  <span v-else-if="usuario.notaHistoria > 10">Nota maxima 10</span> 
                 </div>
               </div>
    
@@ -95,16 +101,18 @@
       usuarioValido() {
         // Validación basada en el filtro actual
         if (this.filtroNota === 'todas') {
-          return this.usuario.notaMatematica || this.usuario.notaLengua || this.usuario.notaHistoria;
+          return (this.usuario.notaMatematica && this.usuario.notaMatematica > 0 && this.usuario.notaMatematica <= 10)
+          || (this.usuario.notaLengua && this.usuario.notaLengua > 0 && this.usuario.notaLengua <= 10)
+          || (this.usuario.notaHistoria && this.usuario.notaHistoria > 0 && this.usuario.notaHistoria <= 10);
         }
         if (this.filtroNota === 'matematica') {
-          return this.usuario.notaMatematica;
+          return this.usuario.notaMatematica && this.usuario.notaMatematica > 0 && this.usuario.notaMatematica <= 10;
         }
         if (this.filtroNota === 'lengua') {
-          return this.usuario.notaLengua;
+          return this.usuario.notaLengua && this.usuario.notaLengua > 0 && this.usuario.notaLengua <= 10;
         }
         if (this.filtroNota === 'historia') {
-          return this.usuario.notaHistoria;
+          return this.usuario.notaHistoria && this.usuario.notaHistoria > 0 && this.usuario.notaHistoria <= 10;
         }
         return false;
       }, 
