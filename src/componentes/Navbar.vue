@@ -13,7 +13,7 @@
             <RouterLink class="nav-link" to="/misNotas">Mis Notas</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/formulario2">Formulario2</RouterLink>
+            <RouterLink class="nav-link" to="/incripcion">Inscripciones</RouterLink>
           </li>
           <li class="nav-item dropdown">
       </li>

@@ -15,7 +15,7 @@ const routes = [
     { path: '/', redirect: '/inicio' },
 
     { path: '/misNotas', component: Formulario },
-    { path: '/formulario2', component: Formulario2 },
+    { path: '/incripcion', component: Formulario2 },
     { path: '/notas', component: Api },
     { path: '/inicio', component: Inicio },
     { path: '/:pathmatch(.*)*', redirect: '/inicio' },
