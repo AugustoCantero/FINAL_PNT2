@@ -41,7 +41,7 @@
               <!-- Campo de notaHistoria -->
               <div v-if="filtroNota === 'todas' || filtroNota === 'historia'" class="form-group">
                 <label for="notaHistoria">Nota Historia</label>
-                <input class="form-control" id="notaHistoria" type="number"
+                <input class="form-control" id="notaHistoria" type="number" step="1"
                        v-model="usuario.notaHistoria" @input="usuarioDirty.notaHistoria=true" />
                 <div v-if="(!usuario.notaHistoria || usuario.notaHistoria < 0 || usuario.notaHistoria > 10 || !Number.isInteger(usuario.notaHistoria)) && usuarioDirty.notaHistoria" class="alert alert-danger mt-1">
                   <span v-if="!usuario.notaHistoria">Campo requerido</span> 
