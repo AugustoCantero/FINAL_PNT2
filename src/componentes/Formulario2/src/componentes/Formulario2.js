@@ -1,4 +1,4 @@
-import axios from "axios"
+import { getAll, post } from "@/servicios/usuarios"
 
 export default {
   name: 'src-componentes-formulario2',
@@ -41,15 +41,14 @@ export default {
     },
     async agregarUsuario() {
       try {
-        const response = await axios.get('https://66562f2f9f970b3b36c490cd.mockapi.io/api/usuarios/');
-        const usuarios = response.data;
+        const usuarios = await getAll()
         const usuarioExistente = usuarios.find(usuario => usuario.email === this.formData.email);
 
         if(!usuarioExistente){
           const datos = {...this.formData}
         console.log(datos)
 
-        await axios.post('https://66562f2f9f970b3b36c490cd.mockapi.io/api/usuarios/', this.formData)
+        await post({...this.formData})
         
 
         this.listarInscripto(datos)

@@ -1,4 +1,4 @@
-import axios from "axios"
+import { getAll } from "@/servicios/usuarios"
 
 export default {
   name: 'src-componentes-formulario',
@@ -50,13 +50,13 @@ export default {
     },
     async getUsuarioNotas(email, password) {
       try {
-        const response = await axios.get(`https://66562f2f9f970b3b36c490cd.mockapi.io/api/usuarios?email=${email}`)
-        const usuario = response.data.find(user => user.email === email && user.password === password)
+        const usuarios = await getAll()
+        const usuario = usuarios.find(user => user.email === email && user.password === password)
         return usuario ? {
           nombre: usuario.nombre,
-          notaMatematica: usuario.notaMatematica || 'sin nota',
-          notaLengua: usuario.notaLengua || 'sin nota',
-          notaHistoria: usuario.notaHistoria || 'sin nota'
+            notaMatematica: usuario.notaMatematica || 'sin nota',
+            notaLengua: usuario.notaLengua || 'sin nota',
+            notaHistoria: usuario.notaHistoria || 'sin nota'
         } : null
       } catch (error) {
         console.log('Error al obtener las notas del usuario ', error)
