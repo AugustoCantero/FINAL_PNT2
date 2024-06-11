@@ -10,41 +10,44 @@
             </button>
           </div>
           <div class="modal-body">
-            <form class="m-3" @submit.prevent="submit">
-  
+
+            <form novalidate class="m-3" @submit.prevent="submit">
 
               <div v-if="filtroNota === 'todas' || filtroNota === 'matematica'" class="form-group">
                 <label for="notaMatematica">Nota Matemática</label>
-                <input class="form-control" id="notaMatematica" type="number" step="1" min="0" max="10" 
+                <input class="form-control" id="notaMatematica" type="number" step="1"
                        v-model="usuario.notaMatematica" @input="usuarioDirty.notaMatematica=true" />
-                <div v-if="(!usuario.notaMatematica || usuario.notaMatematica < 0 || usuario.notaMatematica > 10) && usuarioDirty.notaMatematica" class="alert alert-danger mt-1">
+                <div v-if="(!usuario.notaMatematica || usuario.notaMatematica < 0 || usuario.notaMatematica > 10 || !Number.isInteger(usuario.notaMatematica)) && usuarioDirty.notaMatematica" class="alert alert-danger mt-1">
                   <span v-if="!usuario.notaMatematica">Campo requerido</span> 
                   <span v-else-if="usuario.notaMatematica < 0">Nota minima 0</span> 
-                  <span v-else-if="usuario.notaMatematica > 10">Nota maxima 10</span> 
+                  <span v-else-if="usuario.notaMatematica > 10">Nota maxima 10</span>
+                  <span v-else-if="!Number.isInteger(usuario.notaMatematica)">Solo enteros</span> 
                 </div>
               </div>
 
               <!-- Campo de notaLengua -->
               <div v-if="filtroNota === 'todas' || filtroNota === 'lengua'" class="form-group">
                 <label for="notaLengua">Nota Lengua</label>
-                <input class="form-control" id="notaLengua" type="number" step="1" min="0" max="10" 
+                <input class="form-control" id="notaLengua" type="number" step="1" 
                        v-model="usuario.notaLengua" @input="usuarioDirty.notaLengua=true" />
-                <div v-if="(!usuario.notaLengua || usuario.notaLengua < 0 || usuario.notaLengua > 10) && usuarioDirty.notaLengua" class="alert alert-danger mt-1">
+                <div v-if="(!usuario.notaLengua || usuario.notaLengua < 0 || usuario.notaLengua > 10 || !Number.isInteger(usuario.notaLengua)) && usuarioDirty.notaLengua" class="alert alert-danger mt-1">
                   <span v-if="!usuario.notaLengua">Campo requerido</span> 
                   <span v-else-if="usuario.notaLengua < 0">Nota minima 0</span> 
-                  <span v-else-if="usuario.notaLengua > 10">Nota maxima 10</span> 
+                  <span v-else-if="usuario.notaLengua > 10">Nota maxima 10</span>
+                  <span v-else-if="!Number.isInteger(usuario.notaLengua)">Solo enteros</span> 
                 </div>
               </div>
 
               <!-- Campo de notaHistoria -->
               <div v-if="filtroNota === 'todas' || filtroNota === 'historia'" class="form-group">
                 <label for="notaHistoria">Nota Historia</label>
-                <input class="form-control" id="notaHistoria" type="number" step="1" min="0" max="10" 
+                <input class="form-control" id="notaHistoria" type="number"
                        v-model="usuario.notaHistoria" @input="usuarioDirty.notaHistoria=true" />
-                <div v-if="(!usuario.notaHistoria || usuario.notaHistoria < 0 || usuario.notaHistoria > 10) && usuarioDirty.notaHistoria" class="alert alert-danger mt-1">
+                <div v-if="(!usuario.notaHistoria || usuario.notaHistoria < 0 || usuario.notaHistoria > 10 || !Number.isInteger(usuario.notaHistoria)) && usuarioDirty.notaHistoria" class="alert alert-danger mt-1">
                   <span v-if="!usuario.notaHistoria">Campo requerido</span> 
                   <span v-else-if="usuario.notaHistoria < 0">Nota minima 0</span> 
                   <span v-else-if="usuario.notaHistoria > 10">Nota maxima 10</span> 
+                  <span v-else-if="!Number.isInteger(usuario.notaHistoria)">Solo enteros</span> 
                 </div>
               </div>
    
@@ -96,23 +99,26 @@
       ocultar() {
         this.$emit('ocultar')      
       },
+      notaValida(nota){
+        return Number.isInteger(nota) && nota > 0 && nota <= 10
+      },
     },
     computed: {
       usuarioValido() {
         // Validación basada en el filtro actual
         if (this.filtroNota === 'todas') {
-          return (this.usuario.notaMatematica && this.usuario.notaMatematica > 0 && this.usuario.notaMatematica <= 10)
-          || (this.usuario.notaLengua && this.usuario.notaLengua > 0 && this.usuario.notaLengua <= 10)
-          || (this.usuario.notaHistoria && this.usuario.notaHistoria > 0 && this.usuario.notaHistoria <= 10);
+          return (this.notaValida(this.usuario.notaMatematica))
+          && (this.notaValida(this.usuario.notaLengua))
+          && (this.notaValida(this.usuario.notaHistoria));
         }
         if (this.filtroNota === 'matematica') {
-          return this.usuario.notaMatematica && this.usuario.notaMatematica > 0 && this.usuario.notaMatematica <= 10;
+          return this.notaValida(this.usuario.notaMatematica);
         }
         if (this.filtroNota === 'lengua') {
-          return this.usuario.notaLengua && this.usuario.notaLengua > 0 && this.usuario.notaLengua <= 10;
+          return this.notaValida(this.usuario.notaLengua);
         }
         if (this.filtroNota === 'historia') {
-          return this.usuario.notaHistoria && this.usuario.notaHistoria > 0 && this.usuario.notaHistoria <= 10;
+          return this.notaValida(this.usuario.notaHistoria);
         }
         return false;
       }, 
