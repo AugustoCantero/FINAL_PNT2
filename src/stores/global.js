@@ -2,14 +2,19 @@ import { defineStore } from "pinia";
 
 export const useGlobalStore = defineStore('global', {
     state: () => ({
-        // contador: 321
+        modoOscuro: false,
+        nombreUsuario: null,
     }),
     actions: {
-        // incrementarContador(paso){
-        //     this.contador += paso
-        // }
+        alternarModoOscuro() {
+            this.modoOscuro = !this.modoOscuro;
+        },
+        setNombreUsuario(nombre) {
+            this.nombreUsuario = nombre;
+        }
     },
     getters: {
-        // getContador: state => state.contador
+        modoOscuroActivado: state => state.modoOscuro,
+        getNombreUsuario: state => state.nombreUsuario,
     }
 })

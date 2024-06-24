@@ -14,4 +14,5 @@ app.use(router)
 app.use(pinia)
 
 app.config.globalProperties.$axios = axiosInstance
+
 app.mount('#app')

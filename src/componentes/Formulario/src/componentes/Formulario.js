@@ -1,4 +1,5 @@
 import { getAll } from "@/servicios/usuarios"
+import { useGlobalStore } from '@/stores/global'
 
 export default {
   name: 'src-componentes-formulario',
@@ -9,7 +10,8 @@ export default {
       formData: this.getInicialData(),
       formDirty: this.getInicialData(),
       inscriptos:[],
-      nombreUsuario: null
+      nombreUsuario: null,
+      globalStore: useGlobalStore()
     }
   },
   computed: {
@@ -52,6 +54,9 @@ export default {
       try {
         const usuarios = await getAll()
         const usuario = usuarios.find(user => user.email === email && user.password === password)
+        if (usuario) {
+          this.globalStore.setNombreUsuario(usuario.nombre)
+        }
         return usuario ? {
           nombre: usuario.nombre,
             notaMatematica: usuario.notaMatematica || 'sin nota',
